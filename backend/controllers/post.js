@@ -9,7 +9,7 @@ exports.createPost = (req, res, next) => {
       message: "Votre post ne peut pas être vide"
     });
   }  
-    models.post.create({
+    models.Post.create ({
       title: req.body.title,
       userId: req.userId,
       content: req.body.content,
@@ -21,20 +21,20 @@ exports.createPost = (req, res, next) => {
 
   
 exports.getOnePost = async (req, res, next) => {
-    let post = await models.post.findOne({where:{id: req.params.id}}); // récupére un seul post: ID du post est le meme que l'ID de la requete
-    (post => res.status(200).json(post))
+    let post = await models.Post.findOne({where:{id: req.params.id}}); // récupére un seul post: ID du post est le meme que l'ID de la requete
+    (Post => res.status(200).json(Post))
     .catch(error => res.status(404).json({error}))
 };
 
  
 exports.getAllPost =  (req, res, next) => {
-    models.post.findAll() //récupération de toutes les post
-    .then(post => res.status(200).json(post))
+    models.Post.findAll() //récupération de toutes les post
+    .then(Post => res.status(200).json(Post))
     .catch(error=> res.status(400).json({error}));
  };
 
 exports.modifyPost = (req, res, next) => {
-  models.post.update({
+  models.Post.update({
     where: {
       id: req.params.id
     },
@@ -49,13 +49,13 @@ exports.modifyPost = (req, res, next) => {
 
 
 exports.deletePost =  (req, res, next) => {
-  models.post.destroy({ 
+  models.Post.destroy({ 
     where: {
       id: req.params.id
     }
     })
-  .then(post => {
-      const filename = post.imageUrl.split('/images/')[1];//nom du fichier
+  .then(Post => {
+      const filename = Post.imageUrl.split('/images/')[1];//nom du fichier
       fs.unlink(`images/${filename}`, () => {//méthode pour supprimer le fichier
           post.destroy({where: {id: req.params.id}})
           .then(() => res.status(200).json({message: 'Post supprimée'}))

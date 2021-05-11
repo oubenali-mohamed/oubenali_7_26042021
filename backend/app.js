@@ -20,7 +20,7 @@ const app = express(); //application express créée avec la méthode express
     next();
   });
 
-  const sequelize = new Sequelize( "database_development_groupomania", "root", "", {
+  const sequelize = new Sequelize( "database_development_p7", "root", "", {
     dialect: "mysql",
     host: "localhost"
 });
