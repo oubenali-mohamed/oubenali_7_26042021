@@ -4,7 +4,7 @@ const path = require('path');
 const helmet = require('helmet');
 const session = require('express-session');
 const dotenv = require('dotenv').config();
-const { Sequelize } = require('sequelize');
+const { Sequelize }  = require('sequelize');
 const userRoutes = require('./routes/user');
 const postRoutes = require('./routes/post');
 const commentaireRoutes = require('./routes/commentaire');
@@ -19,18 +19,6 @@ const app = express(); //application express créée avec la méthode express
     res.setHeader('Access-Control-Allow-Methods', 'GET, POST, PUT, DELETE, PATCH, OPTIONS');
     next();
   });
-
-  const sequelize = new Sequelize( "database_development_p7", "root", "", {
-    dialect: "mysql",
-    host: "localhost"
-});
-
-try {
-  sequelize.authenticate();
-  console.log('Connecté à la base de données MySQL!');
-  } catch (error) {
-  console.error('Impossible de se connecter, erreur suivante :', error);
-}
 
 app.use(bodyParser.urlencoded({extended:true}));
 app.use(bodyParser.json());//transforme le corps de la requet en json pour la rendre exploitable

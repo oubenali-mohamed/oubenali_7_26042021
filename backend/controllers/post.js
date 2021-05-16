@@ -1,6 +1,7 @@
 const fs = require('fs'); // acces au fichier systeme
 const app = require('../app');
 const models = require('../models');
+const user = require('../models/user');
 
 exports.createPost = (req, res, next) => {
   
@@ -11,7 +12,7 @@ exports.createPost = (req, res, next) => {
   }  
     models.Post.create ({
       title: req.body.title,
-      userId: req.userId,
+      userId: req.body.userId,
       content: req.body.content,
       image: `${req.protocol}://${req.get("host")}/images/${req.body.imageUrl}`
     })
@@ -22,9 +23,12 @@ exports.createPost = (req, res, next) => {
   
 exports.getOnePost = async (req, res, next) => {
     let post = await models.Post.findOne({where:{id: req.params.id}}); // récupére un seul post: ID du post est le meme que l'ID de la requete
-    (Post => res.status(200).json(Post))
-    .catch(error => res.status(404).json({error}))
-};
+    if(post) {
+      return res.status(200).json(post);
+    } else {
+      return  res.status(500). json({error})
+    }
+  };
 
  
 exports.getAllPost =  (req, res, next) => {
@@ -38,7 +42,7 @@ exports.modifyPost = (req, res, next) => {
     where: {
       id: req.params.id
     },
-    userId: req.userId,
+    userId: req.body.userId,
     title: req.body.title,
     content: req.body.content,
     image: `${req.protocol}://${req.get("host")}/images/${req.body.imageUrl}`

@@ -8,7 +8,6 @@ module.exports = (req, res, next) => {
         if(req.body.userId && req.body.userId !== userId){// si userID de la requete correspond a celui du token
             throw 'User ID non valable';//si different on retourne une erreur
         } else {
-            req.userId =  userId
             next();
         }
     } catch (error) {
