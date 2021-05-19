@@ -5,7 +5,7 @@ const auth = require('../middleware/auth');
 
 
 router.post('/', auth, commentaireCtrl.createCommentaire);
-router.get('/', auth, commentaireCtrl.getAllCommentaire); 
+router.get('/', auth, commentaireCtrl.getAllCommentaireByPost); 
 router.put('/:id', auth, commentaireCtrl.modifyCommentaire);
 router.delete('/:id', auth, commentaireCtrl.deleteCommentaire);
 

@@ -11,7 +11,7 @@ exports.signup = (req, res, next) => {
     
     let email = req.body.email;
     let username = req.body.username;
-    let image = `${req.protocol}://${req.get("host")}/images/${req.body.imageUrl}`;
+    let image = `${req.protocol}://${req.get("host")}/images/${req.file.filename}`;
     let password = req.body.password;
     
 
@@ -25,18 +25,21 @@ exports.signup = (req, res, next) => {
     .has().not().spaces()
     let validPass = checkPass.validate(password);//validation de mot de passe
 
-     
     const maskedEmail = sha256(email);
     
-   if(checkEmail && validPass) {
-    bcrypt.hash(req.body.password, 10) //on hash le mot de passe et on exécute le hashage 10 fois
-    .then(hash => {
-        const user = models.User.create({ // création du nouvel utilisateur
-            username: username,
-            email: maskedEmail,
-            password: hash,
-            image: image,
-            isAdmin: 0
+    if (username.length >= 15 || username.length <= 3) {
+        return res.status(400).json({ 'error': 'Username trop court' });
+      }
+   
+    if(checkEmail && validPass) {
+        bcrypt.hash(req.body.password, 10) //on hash le mot de passe et on exécute le hashage 10 fois
+        .then(hash => {
+            const user = models.User.create({ // création du nouvel utilisateur
+                username: username,
+                email: maskedEmail,
+                password: hash,
+                image: image,
+                isAdmin: 0
         })
         .then(() => res.status(201).json({message: 'utilisateur crée'}))
         .catch(error => res.status(400).json({error}))
@@ -76,7 +79,7 @@ exports.login = async (req, res, next) => {
                 res.status(200).json({
                     userId: user.id, 
                     token: jwt.sign(
-                        {userId: user._id},//user encodé
+                        {userId: user.id},//user encodé
                         process.env.SECRET_KEY_TOKEN,// clé secréte pour encodage
                         {expiresIn: '24h'} // expiration du token
                     )

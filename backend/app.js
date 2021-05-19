@@ -33,7 +33,7 @@ app.use(session({ //génére un id de session
  })); 
 
 app.use('/api/auth', userRoutes); 
-app.use('/api/auth/post', postRoutes);
+app.use('/api/post', postRoutes);
 app.use('/api/commentaire', commentaireRoutes);
 app.use('/images', express.static(path.join(__dirname, 'images')));//donne accés au chemin de notre systeme de fichier
 
