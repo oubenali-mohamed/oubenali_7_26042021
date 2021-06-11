@@ -54,6 +54,7 @@ exports.signup = (req, res, next) => {
 
 //Connexion
 exports.login = async (req, res, next) => {
+    console.log(req.body);
     let checkEmail = emailValidator.validate(req.body.email);
     let checkPass = new passwordValidator();
     checkPass

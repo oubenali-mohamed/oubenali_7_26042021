@@ -1,0 +1,189 @@
+body {
+    margin: 0;
+    padding: 0;
+    background-color: rgba(216, 213, 213, 0.349);
+    font-family: 'Roboto', sans-serif;
+}
+.logo {
+    width: 25%;
+}
+a{
+    text-decoration: none;
+    color: #000;
+    margin-right: 60px;
+    font-size: 20px;
+}
+ header {
+    display: flex;
+    justify-content: space-around;
+    flex-direction: row;
+    height: 100px;
+    align-items: center;
+    background-color: white;
+} 
+#posts{
+    width: 50%;
+    margin-left: 25%;
+}
+.imgPost {
+    width: 50%;
+}
+p {
+    font-size: 20px;
+    margin-left: 20px;
+}
+form {
+    margin-top: 100px;
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    flex-direction: column;
+}
+input {
+    width: 800px;
+    height: 25px;
+    border-radius: 50px;
+    padding: 5px;
+    margin: 20px;
+    text-align: center;
+}
+.btn {
+    border-radius: 50px;
+    padding: 5px 15px 5px 15px;
+    margin: 30px;
+    text-align: center;
+    width: 500px;
+    height: 40px;
+    cursor: pointer;
+}
+.far {
+    color: red;
+    margin-left: 80px;
+}
+#deleteCom{
+    
+    
+    
+    
+    
+   
+}
+.btnSignout {
+    border-radius: 50px;
+    padding: 5px 15px 5px 15px;
+    margin: 30px;
+    text-align: center;
+    width: 100px;
+    height: 40px;
+    cursor: pointer;
+}
+#erreur {
+    color: red;
+}
+i:hover{
+    cursor: pointer;
+    position: relative;
+}
+i{
+    margin-right: 100px;
+}
+nav li:hover .menu{
+    display: flex;
+    flex-direction: column;
+    position: absolute;
+}
+ul > li {
+    list-style-type: none;
+    margin-bottom: 10px;
+    margin-top: -10px;
+}
+.menu {
+    display: none;
+}
+textarea{
+    margin-top: 50px;
+}
+.posts {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    margin: 50px 30px;
+}
+#posts{
+    text-align: center;
+}
+#update, #delete{
+    margin-left: 150px;
+    width: 30%;
+    
+}
+#listCom{
+    border: 1px solid rgb(170, 168, 168);
+    width: 60%;
+    border-radius: 20px;
+    margin-left: 25%;
+    height: 100%;
+}
+
+.deleteCom{
+    margin-left: 90%;
+    color: red;
+}
+.commentaire {
+   text-align: center;
+}
+#onePost {
+    text-align: center;
+    margin-bottom: 100px;
+}
+.titreCom {
+    margin-top: 50px;
+    margin-bottom: -30px;
+}
+
+@media screen and (max-width: 480px) {
+    body {
+        width: auto;
+        height: auto;
+    }
+
+    .logo {
+        width: 150px;
+        margin-left: 50px;
+    }
+
+    header {
+        display: flex;
+        flex-direction: row;
+        justify-content: space-between;
+        width: 227%;
+        margin-bottom: 80px;
+        padding-bottom: 50px;
+    }
+    .user {
+        margin-left: 100px;
+    }
+    #posts{
+        width: 50%;
+        margin-left: 80%;
+    }
+    .imgPost {
+        width: 50%;
+    }
+     footer {
+        width: 175%;
+        height: 300px;
+    }
+    .commentaire {
+        margin-left: 20%;
+    }
+    #form {
+        margin-top: 100px;
+        margin-left: 75%;
+        width: 80%;
+    }
+    #listCom {
+        width: 100%;
+        margin-left: 60%;
+    }
+}

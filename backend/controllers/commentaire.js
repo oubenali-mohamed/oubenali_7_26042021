@@ -3,8 +3,7 @@ const app = require('../app');
 const models = require('../models');
 
 exports.createCommentaire = (req, res, next) => {
-  
-    if(req.body.content == null) {
+  if(req.body.content == null) {
       return res.status(400).send({
         message: "Votre commentaire ne peut pas être vide"
       });
@@ -20,7 +19,7 @@ exports.createCommentaire = (req, res, next) => {
 
 exports.getAllCommentaireByPost =  (req, res, next) => {
       models.Commentaire.findAll({//récupération de toutes les commentaires
-        where: {postId: req.body.postId}
+        where: {postId: req.params.idpost}
       },{
         include: [{
           model: models.Post,

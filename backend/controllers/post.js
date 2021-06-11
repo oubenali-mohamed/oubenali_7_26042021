@@ -74,28 +74,16 @@ exports.modifyPost = (req, res, next) => {
 
 
  exports.deletePost = async (req, res, next) => {
+  let postAvantDelete = await models.Post.findOne({where:{id: req.params.id}});
   let post = await models.Post.destroy({where:{id: req.params.id}});
-  if(post) {
-      return res.status(200).json({message: 'post supprimé'});
+  if(post && postAvantDelete) {
+    const filename = postAvantDelete.image.split('/images/')[1];//nom du fichier
+      fs.unlink(`images/${filename}`, () => {//méthode pour supprimer le fichier
+           return res.status(200).json({message: 'post supprimé'});
+      });
+      
     } else {
     return  res.status(500). json({error})
   }
 }; 
- /* exports.deletePost =  (req, res, next) => {
-  models.Post.destroy({ 
-    where: {
-      id: req.params.id
-    }
-    })
-  .then(post => {
-      const filename = Post.image.split('/images/')[1];//nom du fichier
-      fs.unlink(`images/${filename}`, () => {//méthode pour supprimer le fichier
-          post.destroy({where: {id: req.params.id}})
-          .then(() => res.status(200).json({message: 'Post supprimée'}))
-          .catch(error => res.status(400).json({error}))
-      });
-  })
-  .catch(error=> res.status(500).json({error}))
- 
-};  */
- 
+
