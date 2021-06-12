@@ -24,11 +24,9 @@ fetch(urlPost, {
   .then((Post) => {
     let userId = Post.userId; 
     if(userId == localStorage.getItem('userId')) {
-      document.getElementById('update').style.display="inline-block";
-      document.getElementById('delete').style.display="inline-block";
+     document.getElementById('delete').style.display="inline-block";
     } else {
-      document.getElementById('update').style.display="none";
-      document.getElementById('delete').style.display="none";
+    document.getElementById('delete').style.display="none";
     } 
     onePost.innerHTML += `
         <h1>${Post.title}</h1> </br>
@@ -124,7 +122,7 @@ fetch(urlCom + '/post/' + id , {
   
   // Si la connection à réussi afficher tous les commentaire
   .then((Commentaire) => { 
-    Commentaire.forEach((Commentaire) => { console.log(Commentaire);
+    Commentaire.forEach((Commentaire) => { 
       listCom.innerHTML += ` 
       <a href="commentaire.html?id=${Commentaire.id}">
       <p>${Commentaire.content} </p>
