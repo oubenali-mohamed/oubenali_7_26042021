@@ -23,7 +23,8 @@ fetch(urlPost, {
   })
   .then((Post) => {
     let userId = Post.userId; 
-    if(userId == localStorage.getItem('userId')) {
+    let isAdmin = JSON.parse(localStorage.getItem('isAdmin'));
+    if(userId == localStorage.getItem('userId') || isAdmin == true) {
      document.getElementById('delete').style.display="inline-block";
     } else {
     document.getElementById('delete').style.display="none";
@@ -124,9 +125,8 @@ fetch(urlCom + '/post/' + id , {
   .then((Commentaire) => { 
     Commentaire.forEach((Commentaire) => { 
       listCom.innerHTML += ` 
-      <a href="commentaire.html?id=${Commentaire.id}">
-      <p>${Commentaire.content} </p>
-      </a>`;
+      <p>${Commentaire.content}</p>
+      `;
     });
   });    
 

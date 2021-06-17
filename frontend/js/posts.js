@@ -30,3 +30,29 @@ fetch(url , {
             `;
     });
   }); 
+
+
+  const deleteUser = document.getElementById("btnUser");
+  let urlUser = "http://localhost:3000/api/auth/user";
+  deleteUser.addEventListener("click", function(e) {
+    e.preventDefault();
+      fetch(urlUser, {
+        method: 'DELETE',
+        headers: {
+          'authorization': 'bearer ' + localStorage.getItem('token')
+        }, 
+      })
+      .then(function (response) {
+      if (response.ok) {
+        response.json().then(function (data) {
+          alert("votre compte à bien été supprimé")
+        window.location.href = "index.html";
+        });
+      } else {
+        Promise.reject(response.status);
+      }
+    }) 
+    .catch(function (error) {
+      console.log(error);
+    });
+  })

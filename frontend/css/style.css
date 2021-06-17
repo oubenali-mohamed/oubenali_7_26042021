@@ -1,9 +1,15 @@
 body {
     margin: 0;
     padding: 0;
-    background-color: rgba(216, 213, 213, 0.349);
     font-family: 'Roboto', sans-serif;
+    background-color: rgba(146, 144, 144, 0.39);
 }
+ .imgFond {
+    background-image: url("../images/icon.png");
+    background-repeat: no-repeat;
+    background-size: 40%;
+    background-position: center;
+} 
 .logo {
     width: 25%;
 }
@@ -56,17 +62,24 @@ input {
     height: 40px;
     cursor: pointer;
 }
+#btnUser{
+    border-radius: 50px;
+    
+    margin-right: 50px;
+    width: 15%;
+    text-align: center;
+    height: 40px;
+    cursor: pointer;
+    background-color: red;
+}
+.deleteUser{
+    color: white;
+   
+    font-size: 15px;
+}
 .far {
     color: red;
     margin-left: 80px;
-}
-#deleteCom{
-    
-    
-    
-    
-    
-   
 }
 .btnSignout {
     border-radius: 50px;
@@ -143,8 +156,8 @@ textarea{
 
 @media screen and (max-width: 480px) {
     body {
-        width: auto;
-        height: auto;
+       width: auto;
+       height: auto;
     }
 
     .logo {
@@ -160,6 +173,11 @@ textarea{
         margin-bottom: 80px;
         padding-bottom: 50px;
     }
+    .imgFond {
+        background-size: 120%;
+        background-position: center ;
+      
+    } 
     .user {
         margin-left: 100px;
     }
@@ -179,8 +197,8 @@ textarea{
     }
     #form {
         margin-top: 100px;
-        margin-left: 75%;
-        width: 80%;
+        margin-left: 80%;
+        width: 60%;
     }
     #listCom {
         width: 100%;

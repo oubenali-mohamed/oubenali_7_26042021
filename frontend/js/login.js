@@ -34,6 +34,7 @@ formValid.addEventListener("click", function (e) {
                       response.json().then(function (data) {
                       localStorage.setItem('token', data.token);
                       localStorage.setItem('userId', data.userId);
+                      localStorage.setItem('isAdmin', data.isAdmin);
                       window.location.href = "posts.html";
                     });
                     } else {
