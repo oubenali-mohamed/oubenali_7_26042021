@@ -5,6 +5,9 @@ const emailValidator = require('email-validator');
 const passwordValidator = require('password-validator');
 const sha256 = require('sha256');
 const models = require('../models');
+const user = require('../models/user');
+const fs = require('fs');
+const { Console } = require('console');
 
 //Inscription
 exports.signup = (req, res, next) => {
@@ -27,7 +30,7 @@ exports.signup = (req, res, next) => {
 
     const maskedEmail = sha256(email);
     
-    if (username.length >= 15 || username.length <= 3) {
+    if (username.length >= 15 && username.length <= 3) {
         return res.status(400).json({ 'error': 'Username trop court' });
       }
    
@@ -79,6 +82,7 @@ exports.login = async (req, res, next) => {
                 }
                 res.status(200).json({
                     userId: user.id, 
+                    isAdmin: user.isAdmin,
                     token: jwt.sign(
                         {userId: user.id},//user encodé
                         process.env.SECRET_KEY_TOKEN,// clé secréte pour encodage
@@ -92,3 +96,17 @@ exports.login = async (req, res, next) => {
         res.status(500).json('utilisateur non trouvé');
     }
 };
+exports.deleteUser = async (req, res, next) => {
+    let userAvantDelete = await models.User.findOne();
+    let user = userAvantDelete.destroy({where: {id: req.params.id}}); 
+    if( user && userAvantDelete) {
+        const filename = userAvantDelete.image.split('/images/')[1];//nom du fichier
+        fs.unlink(`images/${filename}`, () => {//méthode pour supprimer le fichier
+             return res.status(200).json({message: 'Utilisateur supprimé'});
+        });
+        }else {
+      return  res.status(500). json({error})
+    }
+  };
+  
+  

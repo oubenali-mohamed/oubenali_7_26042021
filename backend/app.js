@@ -32,6 +32,7 @@ app.use(session({ //génére un id de session
   saveUninitialized: true,
  })); 
 
+app.use('/api/:id', userRoutes);
 app.use('/api/auth', userRoutes); 
 app.use('/api/post', postRoutes);
 app.use('/api/commentaire', commentaireRoutes);
